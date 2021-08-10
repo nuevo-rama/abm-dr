@@ -1,0 +1,24 @@
+{
+  "name": "abm-dr",
+  "version": "1.0.0",
+  "description": "ABM Node MySQL",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nuevo-rama/abm-dr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nuevo-rama/abm-dr/issues"
+  },
+  "homepage": "https://github.com/nuevo-rama/abm-dr#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1"
+  }
+}
