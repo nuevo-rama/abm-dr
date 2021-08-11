@@ -25,3 +25,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
   console.log(`server on port ${app.get('port')}`);
 });
+
+//importing DB
+const dbConection = require('./database/configDB');
+
+//DB conection
+app.use('/', dbConection);

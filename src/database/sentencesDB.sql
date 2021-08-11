@@ -1,0 +1,23 @@
+--DB dbTest2
+
+--Users Table
+
+CREATE TABLE IF NOT EXIST Users (
+userId INT(10) AUTO_INCREMENT, 
+userName VARCHAR(50) NOT NULL, 
+user VARCHAR(30) NOT NULL,
+pass VARCHAR(50) NOT NULL, 
+age TINYINT(3) UNSIGNED NOT NULL, 
+PRIMARY KEY(userId));
+
+--Cards Table
+
+CREATE TABLE IF NOT EXIST Cards (
+cardId INT(10) NOT NULL AUTO_INCREMENT, 
+userId INT(10) NOT NULL,
+cNumber INT(16) UNIQUE, 
+validDate DATE, 
+secCode TINYINT(3), 
+PRIMARY KEY (cardId), 
+FOREIGN KEY (userId) REFERENCES Users(userId));
+
