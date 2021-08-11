@@ -1,7 +1,7 @@
---DB dbTest2
-CREATE SCHEMA `dbTest2` ;
+--DB dbTest3
+CREATE SCHEMA `dbTest3` ;
 
-USE dbTest2;
+USE dbTest3;
 
 --Users Table
 

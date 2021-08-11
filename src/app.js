@@ -1,6 +1,5 @@
-const express = require('express'),
-      path = require('path'), //se encarga de unir directorios
-      mysql = require('mysql');
+const express = require('express');
+const path = require('path'); //se encarga de unir directorios
 
 const app = express();
 
@@ -8,7 +7,7 @@ const app = express();
 const userRoutes = require('./routes/user');
 
 // settings
-app.set('port', process.env.PORT || 3002);
+app.set('port', process.env.PORT || 3003);
 //app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views')); //dirname nos da la ruta del archivo
 
@@ -25,9 +24,3 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.listen(app.get('port'), () => {
   console.log(`server on port ${app.get('port')}`);
 });
-
-//importing DB
-const dbConnection = require('./database/configDB');
-
-//DB connection
-app.use('/', dbConnection);
