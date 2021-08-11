@@ -1,5 +1,10 @@
-const router = require('express').Router();
+const express = require('express');
+const router = express.Router();
 
-const userController = require('../controllers/userController');
+const userRequest = require('../controllers/userRequest');
+const userLogic = require('../logica/userLogic');
 
-router.get('/', userController.list);
+router.get('/', userLogic.list);
+//router.get('/', userRequest.list);
+
+module.exports = router;
