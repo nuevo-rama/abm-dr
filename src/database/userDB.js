@@ -10,27 +10,33 @@ const { connect } = require("./configDB");
 const controller = {};
 
 controller.list = (req, res) => {
-    conexion.query('SELECT * FROM Users',(error, results)=>{
+    //res.render('index');
+    connection.query('SELECT * FROM Users',(error, results)=>{
         if(error){
-            throw error;
+            res.json(error);
         }else{
-            res.render('index.ejs', {results:results});
+            res.render('index', {results:results});
         }
     })
 };
 
-/*controller.create = (req,res) => {    
-    const id = req.params.id;
-    conexion.query('SELECT * FROM users WHERE userId=?',[id] , (error, results) => {
-        if (error) {
-            throw error;
-        }else{            
-            res.render('edit.ejs', {users:results[0]});            
-        }        
+controller.create = (req,res) => {    //recibe los datos desde los inputs
+    //console.log(req.body); //req.body vienen todos los datos de los campos del formulario
+    //res.send('works');
+    const data = req.body;
+    //const id = req.params.id;
+    connection.query('INSERT INTO Users SET ?' [data], (error, dataUser) => {
+        console.log(dataUser);
+        res.send('works');
+        //if (error) {
+            //throw error;
+        //}else{            
+            //res.render('edit.ejs', {users:results[0]});            
+        //}   
     });
 };
 
-controller.delete = (req, res) => {
+/*controller.delete = (req, res) => {
     const id = req.params.id;
     conexion.query('DELETE FROM users WHERE userId = ?',[id], (error, results)=>{
         if(error){

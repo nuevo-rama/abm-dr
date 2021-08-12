@@ -1,0 +1,30 @@
+<%- include('./partials/head'); %>
+
+<body>
+
+  <form action='/add' method="POST">
+    <div>
+      <input type="text" name="userName" placeholder="userName">
+    </div>
+    <div>
+      <input type="text" name="user" placeholder="user">
+    </div>
+    <div>
+      <input type="password" name="pass" placeholder="pass">
+    </div>
+    <div>
+      <input type="number" name="age" placeholder="age">
+    </div>
+    <button type="submit">
+      SAVE USER
+    </button>
+  
+  </form>
+
+  <pre><%= data %></pre>
+
+
+
+</body>
+
+</html>
