@@ -5,40 +5,70 @@ const router = express.Router();
 const connection = require("./configDB");
 const { connect } = require("./configDB");
 
-//exportaremos un objeto con todas las funcionalidades
+const controller = {}; //exportaremos un objeto con todas las funcionalidades
 
-const controller = {};
-
+// SELECT ALL FROM USERS (GET)
 controller.list = (req, res) => {
     //res.render('index');
     connection.query('SELECT * FROM Users',(error, results)=>{
         if(error){
             res.json(error);
         }else{
-            res.render('index', {results:results});
+            res.render('index', {results:results}); //revisar!!!!!
         }
     })
 };
 
-controller.create = (req,res) => {    //recibe los datos desde los inputs
-    //console.log(req.body); //req.body vienen todos los datos de los campos del formulario
-    //res.send('works');
-    const data = req.body;
-    //const id = req.params.id;
-    connection.query('INSERT INTO Users SET ?' [data], (error, dataUser) => {
-        console.log(dataUser);
-        res.send('works');
-        //if (error) {
-            //throw error;
-        //}else{            
-            //res.render('edit.ejs', {users:results[0]});            
-        //}   
+// CREATE (POST)
+controller.save = (req, res) => { 
+    const userName = req.body.userName;
+    const user = req.body.user;
+    const pass = req.body.pass;
+    const age = req.body.age;
+
+    connection.query('INSERT INTO Users SET ?',{userName:userName, user:user, pass:pass, age:age}, (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{
+            console.log(results); 
+            res.redirect('/');         
+        }
     });
 };
 
-/*controller.delete = (req, res) => {
+// EDIT (GET)
+connection.edit = (req, res) => {
     const id = req.params.id;
-    conexion.query('DELETE FROM users WHERE userId = ?',[id], (error, results)=>{
+    connection.query('SELECT * FROM Users WHERE id=?', [id], (error, results) => {
+        if (error) {
+            throw error;
+        }else {
+            res.render ('editUser', {results:results[0]}) //revisar!!!!!
+        }
+    });
+};
+
+// UPDATE (POST)
+connection.update = (req, res) => { 
+    const id = req.body.id;
+    const userName = req.body.userName;
+    const user = req.body.user;
+    const pass = req.body.pass;
+    const age = req.body.age;
+
+    connection.query('UPDATE Users SET ? WHERE id = ?',[{userName:userName, user:user, pass:pass, age:age}, id], (error, results)=>{
+        if(error){
+            console.log(error);
+        }else{           
+            res.redirect('/');         
+        }
+});
+};
+
+//DELETE (GET)
+controller.delete = (req, res) => {
+    const id = req.params.id;
+    connection.query('DELETE FROM Users WHERE id = ?',[id], (error, results)=>{
         if(error){
             console.log(error);
         }else{           
@@ -47,36 +77,7 @@ controller.create = (req,res) => {    //recibe los datos desde los inputs
     })
 };
 
-//GUARDAR un REGISTRO
-controller.save = (req, res)=>{
-    const name = req.body.name;
-    const user = req.body.user;
-    const pass = req.body.pass;
-    const age = req.body.age;
 
-    conexion.query('INSERT INTO Users SET ?',{name:name,user:user,pass:pass,age:age}, (error, results)=>{
-        if(error){
-            console.log(error);
-        }else{ 
-            res.redirect('/');         
-        }
-});
-};
 
-// ACTUALIZAR un REGISTRO
-controller.update = (req, res)=>{
-    const id = req.body.id;
-    const name = req.body.name;
-    const user = req.body.user;
-    const pass = req.body.pass;
-    const age = req.body.age;
-    conexion.query('UPDATE Users SET ? WHERE id = ?',[{name:name,user:user,pass:pass,age:age}, id], (error, results)=>{
-        if(error){
-            console.log(error);
-        }else{           
-            res.redirect('/');         
-        }
-});
-};*/
 
 module.exports = controller;
